@@ -14,41 +14,25 @@ namespace Calculs
             int val1, val2; // mémorisation de nombres aléatoires
             int solution; // calcul de la solution
             int reponse = 0; // saisie de la réponse de l'utilisateur
-            int choix; // saisie du choix de l'utilsiateur
-            bool correct;
+            string choix; // saisie du choix de l'utilsiateur
+            bool correct; // mémorise si la saisie est un entier
 
             // boucle sur le menu
-            choix = 1;
-            while (choix != 0)
+            choix = "1";
+            while (choix != "0")
             {
-                correct = false;
-                while (!correct)
+                // affiche le menu et saisi le choix
+                Console.WriteLine("Addition ....................... 1");
+                Console.WriteLine("Multiplication ................. 2");
+                Console.WriteLine("Quitter ........................ 0");
+                Console.Write("Choix :                          ");
+                choix = Console.ReadLine();
+                // traitement des choix
+                val1 = rand.Next(1, 10);
+                val2 = rand.Next(1, 10);
+                switch (choix)
                 {
-                    try
-                    {
-                        // affiche le menu et saisi le choix
-                        Console.WriteLine("Addition ....................... 1");
-                        Console.WriteLine("Multiplication ................. 2");
-                        Console.WriteLine("Quitter ........................ 0");
-                        Console.Write("Choix :                          ");
-                        choix = int.Parse(Console.ReadLine());
-                        // traitement des choix  
-                        correct = true;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Erreur de saisie");
-                    }
-                }
-
-
-                if (choix != 0)
-                {
-                    if (choix == 1)
-                    {
-                        // choix de l'addition
-                        val1 = rand.Next(1, 10);
-                        val2 = rand.Next(1, 10);
+                    case "1": // addition
                         // saisie de la réponse
                         correct = false;
                         while (!correct)
@@ -61,10 +45,10 @@ namespace Calculs
                             }
                             catch
                             {
-                                Console.WriteLine("Erreur de saisie : veuillez saisir un nombre entier");
+                                Console.WriteLine("Saisissez un entier");
                             }
                         }
-                        // comparaison avec la bonne réponse
+                        // comparaison avec la réponse
                         solution = val1 + val2;
                         if (reponse == solution)
                         {
@@ -74,12 +58,8 @@ namespace Calculs
                         {
                             Console.WriteLine("Faux : " + val1 + " + " + val2 + " = " + solution);
                         }
-                    }
-                    if (choix == 2)
-                    {
-                        // choix de la multiplication
-                        val1 = rand.Next(1, 10);
-                        val2 = rand.Next(1, 10);
+                        break;
+                    case "2": // multiplication
                         // saisie de la réponse
                         correct = false;
                         while (!correct)
@@ -92,11 +72,10 @@ namespace Calculs
                             }
                             catch
                             {
-                                Console.WriteLine("Erreur de saisie : veuillez saisir un nombre entier");
+                                Console.WriteLine("Saisissez un entier");
                             }
                         }
-
-                        // comparaison avec la bonne réponse
+                        // comparaison avec la réponse
                         solution = val1 * val2;
                         if (reponse == solution)
                         {
@@ -106,11 +85,12 @@ namespace Calculs
                         {
                             Console.WriteLine("Faux : " + val1 + " x " + val2 + " = " + solution);
                         }
-                    }
-                    else
-                    {
+                        break;
+                    case "0": // demande de fin de programme
+                        break;
+                    default: // autre valeur donc erreur de saisie
                         Console.WriteLine("Erreur de saisie");
-                    }
+                        break;
                 }
             }
         }
